@@ -1,8 +1,8 @@
 {
-  "name": "goit-react-hw-02-phonebook-draft-ii",
+  "name": "goit-react-hw-03-image-finder-draft",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://vokur13.github.io/goit-react-hw-02-phonebook-draft-ii/",
+  "homepage": "https://vokur13.github.io/goit-react-hw-03-image-finder-draft/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
