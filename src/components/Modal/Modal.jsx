@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { createPortal } from 'react-dom';
 import './Modal.scss';
 
@@ -7,15 +7,26 @@ import './Modal.scss';
 //   - Слушатель на keydown для Escape
 //   - Слушатель на клик по Backdrop
 
+const modalRoot = document.querySelector('#modal-root');
+
 export class Modal extends Component {
   componentDidMount() {
-    console.log('Modal Component DidMount');
+    window.addEventListener('keydown', e => {
+      console.log(e.code);
+      if (e.code === 'Escape') {
+        console.log('ESC pressed');
+        this.props.onClose();
+      }
+    });
   }
+  componentWillUnmount() {}
+
   render() {
-    return (
+    return createPortal(
       <div className="Modal__backdrop">
         <div className="Modal__content">{this.props.children}</div>
-      </div>
+      </div>,
+      modalRoot
     );
   }
 }

@@ -2,34 +2,34 @@ import React, { Component } from 'react';
 import { Box } from '../components/Box';
 import { Button } from '../components/Button';
 import { Modal } from '../components/Modal';
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 
 export class App extends Component {
   state = {
     showModal: false,
   };
 
-  formSubmitHandler = ({ name, number }) => {
-    const contact = {
-      id: nanoid(),
-      name,
-      number,
-    };
+  //   formSubmitHandler = ({ name, number }) => {
+  //     const contact = {
+  //       id: nanoid(),
+  //       name,
+  //       number,
+  //     };
 
-    const checkName = this.state.contacts.some(item =>
-      item.name.toLowerCase().includes(contact.name.toLowerCase())
-    );
+  //     const checkName = this.state.contacts.some(item =>
+  //       item.name.toLowerCase().includes(contact.name.toLowerCase())
+  //     );
 
-    checkName
-      ? alert(`${contact.name} is already in contacts`)
-      : this.setState(({ contacts }) => ({
-          contacts: [contact, ...contacts],
-        }));
-  };
+  //     checkName
+  //       ? alert(`${contact.name} is already in contacts`)
+  //       : this.setState(({ contacts }) => ({
+  //           contacts: [contact, ...contacts],
+  //         }));
+  //   };
 
-  changeFilter = e => {
-    this.setState({ filter: e.target.value });
-  };
+  //   changeFilter = e => {
+  //     this.setState({ filter: e.target.value });
+  //   };
 
   //   getFilteredItems = () => {
   //     //     const { showModal } = this.state;
@@ -39,11 +39,11 @@ export class App extends Component {
   //     );
   //   };
 
-  deleteItem = itemID => {
-    this.setState(prevState => ({
-      contacts: prevState.contacts.filter(item => item.id !== itemID),
-    }));
-  };
+  //   deleteItem = itemID => {
+  //     this.setState(prevState => ({
+  //       contacts: prevState.contacts.filter(item => item.id !== itemID),
+  //     }));
+  //   };
 
   toggleModal = () => {
     this.setState(({ showModal }) => ({ showModal: !showModal }));
@@ -58,7 +58,7 @@ export class App extends Component {
           Open modal
         </button>
         {showModal && (
-          <Modal>
+          <Modal onClose={this.toggleModal}>
             <h1>Hello, this is modal content as children!</h1>
             <p>
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa et
