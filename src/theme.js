@@ -19,12 +19,12 @@ export const theme = {
   },
   fontSizes: {
     xs: '12px',
-    s: '14px',
-    m: '16px',
+    s: '18px',
+    m: '24px',
     l: '32px',
     xl: '64px',
   },
-  sizes: [0, 4, 8, 12, 16, 24, 32, 64, 128, 256, 512],
+  sizes: [0, 4, 8, 12, 16, 20, 24, 32, 64, 128, 256, 512],
   fontWeights: {
     normal: 400,
     bold: 700,
@@ -43,6 +43,7 @@ export const theme = {
   },
   radii: {
     none: '0',
+    searchForm: '3px',
     normal: '4px',
     round: '50%',
   },

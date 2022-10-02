@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Box } from 'components/Box';
 import { Button } from 'components/Button';
 import { SearchBar } from 'components/Searchbar';
+import { ImageGallery } from 'components/ImageGallery';
+import { Loader } from 'components/Loader';
 import { Modal } from 'components/Modal';
 
 // import { nanoid } from 'nanoid';
@@ -21,7 +23,10 @@ export class App extends Component {
     return (
       <>
         <SearchBar />
-        <Box display="grid" gridTemplateColumns="1fr" gridGap={4} pb={5}></Box>
+        <Box display="grid" gridTemplateColumns="1fr" gridGap={4} pb={5}>
+          <ImageGallery />
+          <Loader />
+        </Box>
         <button type="button" onClick={this.toggleModal}>
           Open modal
         </button>

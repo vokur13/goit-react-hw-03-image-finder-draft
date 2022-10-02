@@ -62,13 +62,13 @@ img {
  * Стили компонента SearchForm
  */
 .SearchForm {
-  display: flex;
+  /* display: flex;
   align-items: center;
   width: 100%;
   max-width: 600px;
   background-color: #fff;
   border-radius: 3px;
-  overflow: hidden;
+  overflow: hidden; */
 }
 
 .SearchForm-button {
@@ -103,19 +103,19 @@ img {
 }
 
 .SearchForm-input {
-  display: inline-block;
+  /* display: inline-block;
   width: 100%;
   font: inherit;
   font-size: 20px;
   border: none;
   outline: none;
   padding-left: 4px;
-  padding-right: 4px;
+  padding-right: 4px; */
 }
 
 .SearchForm-input::placeholder {
-  font: inherit;
-  font-size: 18px;
+  /* font: inherit;
+  font-size: 18px; */
 }
 
 /*

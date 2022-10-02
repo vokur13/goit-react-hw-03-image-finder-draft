@@ -1,7 +1,23 @@
 import { Box } from 'components/Box';
+import { Formik } from 'formik';
+import { SearchForm, Input, Error } from './Searchbar.styled';
+import * as yup from 'yup';
 import 'css/styles.css';
 
+const initialValues = {
+  query: '',
+};
+
+let schema = yup.object().shape({
+  login: yup.string(),
+});
+
 export const SearchBar = () => {
+  const handleSubmit = (values, { resetForm }) => {
+    console.log(values);
+    resetForm();
+  };
+
   return (
     <Box
       top={0}
@@ -16,22 +32,29 @@ export const SearchBar = () => {
       py={3}
       color="white"
       bg="accent"
-      boxShadow="appBarr"
+      boxShadow="appBar"
       as="header"
     >
-      <form className="form">
-        <button type="submit" className="button">
-          <span className="button-label">Search</span>
-        </button>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={schema}
+        onSubmit={handleSubmit}
+      >
+        <SearchForm>
+          <button type="submit" className="button">
+            <span className="button-label">Search</span>
+          </button>
 
-        <input
-          className="input"
-          type="text"
-          autoComplete="off"
-          autoFocus
-          placeholder="Search images and photos"
-        />
-      </form>
+          <Input
+            type="text"
+            name="query"
+            autoComplete="off"
+            autoFocus
+            placeholder="Search images and photos"
+          />
+          <Error component="div" name="query" />
+        </SearchForm>
+      </Formik>
     </Box>
   );
 };
