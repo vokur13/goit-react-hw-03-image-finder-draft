@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Box } from 'components/Box';
 import { Formik } from 'formik';
 import { SearchForm, Input, Error } from './Searchbar.styled';
@@ -12,9 +13,10 @@ let schema = yup.object().shape({
   login: yup.string(),
 });
 
-export const SearchBar = () => {
+export const SearchBar = ({ onSubmit }) => {
   const handleSubmit = (values, { resetForm }) => {
     console.log(values);
+    onSubmit(values);
     resetForm();
   };
 
@@ -57,4 +59,8 @@ export const SearchBar = () => {
       </Formik>
     </Box>
   );
+};
+
+SearchBar.propTypes = {
+  onSubmit: PropTypes.func,
 };
