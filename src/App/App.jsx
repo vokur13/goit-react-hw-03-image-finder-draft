@@ -1,38 +1,31 @@
 import React, { Component } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import 'css/styles.css';
 // import axios from 'axios';
 // import { Box } from 'components/Box';
 // import { Button } from 'components/Button';
-// import { SearchBar } from 'components/Searchbar';
+import { Searchbar } from 'components/Searchbar';
+import { ImageGalleryAPI } from 'components/ImageGalleryAPI';
 // import { ImageGallery } from 'components/ImageGallery';
-// import { Loader } from 'components/Loader';
+import { Loader } from 'components/Loader';
 // import { Modal } from 'components/Modal';
 // import Button from '@mui/material/Button';
 
-const API_KEY = '29248542-cea93977a5234fa0e2d1b3dfd';
-
 export class App extends Component {
-  state = { gallery: null };
+  state = { searchQuery: '' };
 
-  componentDidMount() {
-    fetch(
-      `https://pixabay.com/api/?q=cat&page=1&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`
-    )
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(response.status);
-        }
-        return response.json();
-      })
-      .then(gallery => {
-        this.setState({ gallery });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
+  handleSearchbarSubmit = searchQuery => {
+    this.setState({ searchQuery });
+  };
+
   render() {
     return (
-      <>{this.state.gallery && <div>{this.state.gallery.hits[0].id}</div>}</>
+      <>
+        <Searchbar onSubmit={this.handleSearchbarSubmit} />
+        <ImageGalleryAPI searchQuery={this.state.searchQuery} />
+        <ToastContainer position="top-center" autoClose={3000} />
+      </>
     );
   }
 }

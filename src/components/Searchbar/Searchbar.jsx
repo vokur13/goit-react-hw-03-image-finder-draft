@@ -1,66 +1,46 @@
-import PropTypes from 'prop-types';
-import { Box } from 'components/Box';
-import { Formik } from 'formik';
-import { SearchForm, Input, Error } from './Searchbar.styled';
-import * as yup from 'yup';
-import 'css/styles.css';
+import { Component } from 'react';
+import { ImSearch } from 'react-icons/im';
+import { toast } from 'react-toastify';
+import '../../css/styles.css';
 
-const initialValues = {
-  query: '',
-};
+export class Searchbar extends Component {
+  state = { query: '' };
 
-let schema = yup.object().shape({
-  login: yup.string(),
-});
-
-export const SearchBar = ({ onSubmit }) => {
-  const handleSubmit = (values, { resetForm }) => {
-    console.log(values);
-    onSubmit(values);
-    resetForm();
+  handleQueryChange = e => {
+    this.setState({ query: e.currentTarget.value.toLowerCase() });
   };
 
-  return (
-    <Box
-      top={0}
-      left={0}
-      position="sticky"
-      zIndex="appBar"
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      minHeight={7}
-      px={5}
-      py={3}
-      color="white"
-      bg="accent"
-      boxShadow="appBar"
-      as="header"
-    >
-      <Formik
-        initialValues={initialValues}
-        validationSchema={schema}
-        onSubmit={handleSubmit}
-      >
-        <SearchForm>
-          <button type="submit" className="button">
-            <span className="button-label">Search</span>
+  handleSubmit = e => {
+    e.preventDefault();
+    if (this.state.query.trim() === '') {
+      return toast.error('Please input Your query');
+    }
+    this.props.onSubmit(this.state.query);
+    this.setState({ query: '' });
+  };
+
+  render() {
+    return (
+      <header className="Searchbar">
+        <form onSubmit={this.handleSubmit} className="SearchForm">
+          <button type="submit">
+            <span>
+              <ImSearch style={{ marginRight: 8 }} />
+              Search
+            </span>
           </button>
 
-          <Input
+          <input
+            className="SearchForm-input"
             type="text"
             name="query"
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
+            onChange={this.handleQueryChange}
           />
-          <Error component="div" name="query" />
-        </SearchForm>
-      </Formik>
-    </Box>
-  );
-};
-
-SearchBar.propTypes = {
-  onSubmit: PropTypes.func,
-};
+        </form>
+      </header>
+    );
+  }
+}
