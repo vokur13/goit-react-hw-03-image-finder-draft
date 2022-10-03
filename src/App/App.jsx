@@ -8,7 +8,7 @@ import 'css/styles.css';
 import { Searchbar } from 'components/Searchbar';
 import { ImageGalleryAPI } from 'components/ImageGalleryAPI';
 // import { ImageGallery } from 'components/ImageGallery';
-import { Loader } from 'components/Loader';
+
 // import { Modal } from 'components/Modal';
 // import Button from '@mui/material/Button';
 
