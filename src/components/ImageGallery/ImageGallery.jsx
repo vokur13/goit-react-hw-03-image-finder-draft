@@ -1,11 +1,16 @@
 import { ImageGalleryItem } from 'components/ImageGalleryItem';
 
-// export const ImageGallery = ({ selectedGallery }) => {
-//   return (
-//     <ul className="gallery">
-//       {selectedGallery.map(({ id, webformatURL, largeImageURL }) => {
-//         <ImageGalleryItem />;
-//       })}
-//     </ul>
-//   );
-// };
+export const ImageGallery = ({ data }) => {
+  return (
+    <ul className="ImageGallery">
+      {data.map(item => (
+        <ImageGalleryItem
+          key={item.id}
+          webformatURL={item.webformatURL}
+          largeImageURL={item.largeImageURL}
+          tags={item.tags}
+        />
+      ))}
+    </ul>
+  );
+};

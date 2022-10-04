@@ -1,4 +1,6 @@
 import { Component } from 'react';
+import { toast } from 'react-toastify';
+import { ImageGallery } from 'components/ImageGallery';
 import { Loader } from 'components/Loader';
 
 const API_KEY = '29248542-cea93977a5234fa0e2d1b3dfd';
@@ -13,12 +15,20 @@ export class ImageGalleryAPI extends Component {
       )
         .then(response => {
           if (!response.ok) {
-            //     throw new Error(response.status);
-            throw new Error(`No item ${this.props.searchQuery} found`);
+            throw new Error(response.status);
+            //     throw new Error(`No item ${this.props.searchQuery} found`);
           }
           return response.json();
         })
-        .then(data => this.setState({ data, status: 'resolved' }))
+        .then(data => {
+          if (data.hits.length === 0) {
+            return toast.error(`No item ${this.props.searchQuery} found`);
+          }
+          console.log('data', data);
+          const { hits } = data;
+          console.log(hits);
+          this.setState({ data, status: 'resolved' });
+        })
         .catch(error => {
           this.setState({ error, status: 'rejected' });
         });
@@ -26,8 +36,6 @@ export class ImageGalleryAPI extends Component {
   }
 
   render() {
-    //     const { loader, data, error, status } = this.state;
-    //     const { searchQuery } = this.props;
     const { data, error, status } = this.state;
 
     if (status === 'idle') {
@@ -37,35 +45,10 @@ export class ImageGalleryAPI extends Component {
       return <Loader />;
     }
     if (status === 'rejected') {
-      return <div>{error.message}</div>;
+      return <div>{error}</div>;
     }
     if (status === 'resolved') {
-      return (
-        <>
-          <div>{data.hits[0].id}</div>
-          <div>{data.hits[0].webformatURL}</div>
-          <div>{data.hits[0].largeImageURL}</div>
-          <div>
-            <img src={data.hits[0].webformatURL} alt={data.hits[0].id} />
-          </div>
-        </>
-      );
+      return <ImageGallery data={data.hits} />;
     }
-
-    //     return (
-    //       <div>
-    //         {error && <div>{error.message}</div>}
-    //         {loader && <Loader />}
-    //         {!searchQuery && <div>Let us know query item</div>}
-    //         {data && <div>{data.hits[0].id}</div>}
-    //         {data && <div>{data.hits[0].webformatURL}</div>}
-    //         {data && <div>{data.hits[0].largeImageURL}</div>}
-    //         {data && (
-    //           <div>
-    //             <img src={data.hits[0].webformatURL} alt={data.hits[0].id} />
-    //           </div>
-    //         )}
-    //       </div>
-    //     );
   }
 }
